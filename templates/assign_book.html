@@ -1,0 +1,30 @@
+{% include 'librarian_head.html' %}
+<div class="m-20">
+    <div class="row mt-100">
+    {% set librarian=get_librarian_by_librarian_id(borrowing['librarian_id'])%}
+    {% set location=get_location_by_location_id(borrowing['location_id'])%}
+        <div class="col-6">
+            <div class="display-label">Librarian Name</div>
+           <div>{{librarian['first_name']}}</div>
+        </div>
+        <div class="col-6">
+            <div class="display-label">Location Name</div>
+            <div>{{location['location_name']}}</div>
+        </div>
+    </div>
+    <div class="row">
+        {% for book_copy in book_copies %}
+        {% set is_assigned = is_book_assigned(borrowing['_id'],book_copy['book_copy_number']) %}
+            <div class="col-1 p-10">
+                <div class="card p-10 mt-20 text-center">
+                    <div>{{book_copy['book_copy_number']}}</div>
+        {% if is_assigned %}
+            <div class="text-center fs-small">Not Available</div>
+        {% else %}
+             <a href="assign_book_action?borrowing_id={{borrowing['_id']}}&book_copy_number={{book_copy['book_copy_number']}}">assign</a>
+        {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

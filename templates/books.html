@@ -1,0 +1,122 @@
+{% if session['role'] == "librarian" %}
+    {% include 'librarian_head.html'%}
+{% endif %}
+{% if session['role'] == "admin" %}
+    {% include 'admin_head.html' %}
+{% endif %}
+
+<div class="container mt-100">
+    <!-- Search Form -->
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <form action="books" method="get">
+                <div class="input-group mb-3">
+                    <input class="form-control" type="search" name="keyword" placeholder="Search for a book..." aria-label="Search">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Book Form -->
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6">
+            <div class="card p-4">
+                <h3 class="text-center mb-4">Add New Book</h3>
+                <form action="add_book_action" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="book_name" class="form-label">Book Name</label>
+                        <input type="text" name="book_name" id="book_name" class="form-control" placeholder="Enter Book Name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="category_id" class="form-label">Category</label>
+                        <select class="form-control" id="category_id" name="category_id">
+                            <option value="">Choose category</option>
+                            {% for category in categories %}
+                                <option value="{{category['_id']}}">{{category["category_name"]}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    {% if session['role'] == 'librarian' %}
+                        <div class="mb-3">
+                            <label for="location_id" class="form-label">Location</label>
+                            <select id="location_id" name="location_id" class="form-control">
+                                <option value="">Choose location</option>
+                                {% for location in locations %}
+                                    <option value="{{location['_id']}}">{{location['location_name']}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    {% endif %}
+
+                    <div class="mb-3">
+                        <label for="picture" class="form-label">Book Picture</label>
+                        <input type="file" name="picture" id="picture" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="author" class="form-label">Author</label>
+                        <input type="text" name="author" id="author" class="form-control" placeholder="Enter Author Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Price</label>
+                        <input type="number" name="price" id="price" class="form-control" placeholder="Enter Price" required>
+                    </div>
+
+                    {% if session['role'] == 'librarian' %}
+                        <div class="mb-3">
+                            <label for="available_copies" class="form-label">Available Copies</label>
+                            <input type="number" name="available_copies" id="available_copies" class="form-control" placeholder="Enter Available Copies" required>
+                        </div>
+                    {% endif %}
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea name="description" id="description" class="form-control" placeholder="Enter Description" required></textarea>
+                    </div>
+
+                    <div class="text-center">
+                        <input type="submit" value="Add Book" class="btn btn-primary w-100">
+                    </div>
+                </form>
+                <div class="text-center mt-3">{{message}}</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Book Display Section -->
+    <div class="book-card-container mt-100">
+        {% for book in books %}
+        {% set location= get_location_by_location_id(book['location_id']) %}
+            <div class="book-card">
+                <!-- Image Section -->
+                <img src="../static/Book_Profiles/{{ book['picture'] }}" class="poster" alt="Book Image">
+
+                <!-- Content Section -->
+                <div class="card-details">
+                    <div class="mt-5">
+                        <div class="card-title">Book Name</div>
+                        <div class="card-text">{{ book['book_name'] }}</div>
+                    </div>
+                    <div class="mt-5">
+                        <div class="card-title">Author</div>
+                        <div class="card-text">{{ book['author'] }}</div>
+                    </div>
+                    <div class="mt-5">
+                        <div class="card-title">Price</div>
+                        <div class="card-text">${{ book['price'] }}</div>
+                    </div>
+                    <div class="mt-5">
+                        <div class="card-title">Location</div>
+                        <div class="card-text">{{ location['location_name'] }}</div>
+                    </div>
+                    <div class="mt-5">
+                        <a href="add_book_copies?book_id={{ book['_id'] }}" class="btn btn-warning">Add Copies</a>
+                        <a href="book_copies?book_id={{ book['_id'] }}" class="btn btn-info">View Copies</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+</div>

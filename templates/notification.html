@@ -1,0 +1,43 @@
+{% if session['role']=="librarian"%}
+    {% include 'librarian_head.html'%}
+{% elif session['role']=="admin"%}
+    {% include 'admin_head.html' %}
+{% elif session['role']=="member"%}
+    {% include 'member_head.html' %}
+{% endif %}
+
+<div class="m-20">
+    {% set book=get_book_by_book_id(reserves['book_id'])%}
+    {% set librarian=get_librarian_by_librarian_id(reserves['librarian_id'])%}
+    {% set member=get_member_by_member_id(reserves['member_id'])%}
+
+    <table border="1" class="mt-100 w-100">
+        <thead>
+        <tr>
+            <th class="text-center">Book Name</th>
+            <th class="text-center">Librarian Name</th>
+            <th class="text-center">Member Name</th>
+            <th class="text-center">date</th>
+            <th class="text-center">status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>
+                <div class="text-center">{{book['book_name']}}</div>
+            </td>
+            <td>
+                <div class="text-center">{{librarian['first_name']}} {{librarian['last_name']}}</div>
+            </td>
+            <td>
+                <div class="text-center">{{member['first_name']}} {{member['last_name']}}</div>
+            </td>
+            <td class="text-center">{{reserves['date'].strftime("%d-%m-%Y %H:%M %p")}}</td>
+            <td class="text-center">{{reserves['status']}}</td>
+
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>

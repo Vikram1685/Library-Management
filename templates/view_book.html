@@ -1,0 +1,65 @@
+{% if session['role']=="librarian"%}
+    {% include 'librarian_head.html'%}
+{% elif session['role']=="admin"%}
+    {% include 'admin_head.html' %}
+{% elif session['role']=="member"%}
+    {% include 'member_head.html' %}
+{% endif %}
+<div class="row ">
+    <div class="col-4">
+        <form action="view_book">
+            <div class="row">
+                <div class="col-4 p-8">
+                    <input class="form-control" type="search" name="keyword">
+                </div>
+                <div class="col-4 p-8">
+                    <input class='form-control' type="submit" value="search">
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+              {% for book in books%}
+                {% set category=get_category_by_category_id(book['category_id'])%}
+                {% set location= get_location_by_location_id(book['location_id']) %}
+              <div class="col-5 p-10 mt-10">
+                  <div class="card p-10 book-card">
+                    <div><img src="../static/Book_Profiles/{{book['picture']}}"  class="book-image"></div>
+                       <div class="mt-5">
+                             <div class="display-label">Book Name</div>
+                             <div class="book_type">{{book['book_name']}}</div>
+                      </div>
+                      <div class="mt-5">
+                             <div class="display-label">Author Name</div>
+                      <div class="book_author">{{book['author']}}</div>
+                      </div>
+                      <div class="mt-5">
+                          <div class="display-label">Price</div>
+                          <div class="display-text">${{book['price']}}</div>
+                      </div>
+                      <div class="mt-5">
+                          <div class="display-label">Location</div>
+                          <div class="display-text">{{location['location_name']}}</div>
+                      </div>
+                      {% if session['role'] == 'member' %}
+                      <div class="mt-10">
+                          {% set is_borrowing = is_book_borrowed_by_member(book['_id']) %}
+                          {% if is_borrowing %}
+                            <div>You can not send Request</div>
+                          {% else %}
+                            <a class="card" href="book_copies?book_id={{book['_id']}}"> Send Request</a>
+                          {% endif %}
+                      </div>
+                      {% endif %}
+                      <div class="mt-5">
+                          <div class="display-label">Description</div>
+                          <div class="display-text">{{book['description']}}</div>
+                      </div>
+
+
+                  </div>
+              </div>
+              {% endfor %}
+</div>
+

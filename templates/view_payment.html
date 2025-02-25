@@ -1,0 +1,41 @@
+{% if session['role']=="librarian"%}
+    {% include 'librarian_head.html'%}
+{% endif %}
+{% if session['role']=="member"%}
+    {% include 'member_head.html' %}
+{% endif %}
+<div class="row mt-100">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <div class="card p-10 ">
+            <div class="col-6 mt-10">
+                <div class="display-label">Amount</div>
+                <div>${{payment['fine']}}</div>
+            </div>
+            <div class="col-6 mt-10">
+                <div class="display-label">Card Number</div>
+                <div>{{payment['card_number']}}</div>
+            </div>
+            <div class="col-6 mt-10">
+                <div class="display-label">Name On Card</div>
+                <div>{{payment['name_on_card']}}</div>
+            </div>
+            <div class="col-6 mt-10">
+                <div class="display-label">CVV</div>
+                <div>{{payment['cvv']}}</div>
+            </div>
+            <div class="col-6 mt-10">
+                <div class="display-label">Expiry Date</div>
+                <div>{{payment['expiry_date']}}</div>
+            </div>
+            <div class="col-6 mt-10">
+                <div class="display-label">Card Type</div>
+                <div>{{payment['card_type']}}</div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-4"></div>
+
+
+</div>

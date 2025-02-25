@@ -1,0 +1,177 @@
+{% include 'admin_head.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Add Locations</title>
+    <style>
+        /* Overall container styling */
+        .row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 100px;
+        }
+
+        /* Form container */
+        .card {
+            padding: 20px;
+            margin: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        .form-group {
+            margin-top: 10px;
+        }
+
+        /* Form Input styling */
+        .form-control {
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        /* Submit button */
+        .btn-color {
+            background-color: #3498db; /* Blue color for the button */
+            color: white;
+            font-size: 1rem;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn-color:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+        }
+
+        /* Locations List Section */
+        .table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        .table th, .table td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #f1f1f1;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .table td {
+            border-top: 1px solid #ddd;
+            color: #555;
+        }
+
+        .color-text {
+            color: #2c3e50; /* Dark text color */
+        }
+
+        .mt-100 {
+            margin-top: 100px;
+        }
+
+        .mt-10 {
+            margin-top: 10px;
+        }
+
+        .mt-20 {
+            margin-top: 20px;
+        }
+
+        .p-20 {
+            padding: 20px;
+        }
+
+        .m-20 {
+            margin: 20px;
+        }
+        .ml-100 {
+            margin-left: 100px;
+        }
+
+        /* Text styling for form labels */
+        .fs-4 {
+            font-size: 1.25rem;
+        }
+
+        .fs-5 {
+            font-size: 1.1rem;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: #333;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="row mt-100">
+        <!-- Form to Add Location -->
+        <div class="col-4">
+            <div class="card p-20 m-20 w-100">
+                <form action="add_location_action" method="post">
+                    <div class="mt-10 form-group">
+                        <label class="text-center fs-4 h-4 h1-100" for="location_name">Add Locations</label>
+                        <input type="text" name="location_name" class="form-control pe-30 mt-10" id="location_name" placeholder="Enter location" required>
+                    </div>
+                    <div class="mt-10">
+                        <input type="submit" value="Add" class="btn w-100 btn-color p-10">
+                    </div>
+                </form>
+                <div>{{message}}</div>
+            </div>
+        </div>
+
+        <!-- Location List Table -->
+        <div class="col-4"></div>
+        <div class="col-4 ml-100 p-8 mt-20">
+            <div class="card p-20 w-90">
+                <h3>Locations List</h3>
+                <table class="table w-100  mt-5" border="1">
+                    <thead>
+                        <tr class="color-text">
+                            <th>Location Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for location in locations %}
+                            <tr>
+                                <td>{{ location['location_name'] }}</td>
+                                <td>
+                                   <div>
+                                        <form action="edit_location">
+                                            <div>
+                                                <input type="hidden" name="location_id" value="{{location['_id']}}">
+                                                <button class="avpc-edit-btn">Edit</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+{% if session['role']=="librarian"%}
+    {% include 'librarian_head.html'%}
+{% elif session['role']=="admin"%}
+    {% include 'admin_head.html' %}
+{% elif session['role']=="member"%}
+    {% include 'member_head.html' %}
+{% endif %}
+<div class="mt-100">
+
+    {% for location_book in location_books %}
+    {% set location = get_location_by_location_id(location_books[location_book]['location_id']) %}
+    {% set librarian = get_librarian_by_librarian_id(location_books[location_book]['librarian_id']) %}
+        <div class="card p-10 m-20">
+            <div class="row">
+                <div class="col-1"></div>
+                <div class="col-3">
+                    <div>Location</div>
+                    <div>{{location['location_name']}}</div>
+                </div>
+                <div class="col-3">
+                    <div>Librarian</div>
+                    <div>{{librarian["first_name"]}} {{librarian["last_name"]}}</div>
+                </div>
+                <div class="col-3">
+                    {% if session['role'] != 'member' %}
+                        {{location_books[location_book]['number_of_copies']}} books available
+                    {% else %}
+                    {% set available_count = get_available_books_by_librarian_id(book_id,librarian['_id']) %}
+                        {% if available_count > 0 %}
+                            <div class="mt-10">
+                                <a class="card" href="send_request?book_id={{book_id}}&location_id={{location['_id']}}&librarian_id={{librarian['_id']}}">Send Request</a>
+                            </div>
+                        {% else %}
+                            {% set is_register = is_notification_reserved(book_id,librarian['_id']) %}
+                            {% if is_register %}
+                                <div>You will receive Notification</div>
+                            {% else %}
+                                <div class="mt-10">
+                                    <a class="card" href="notify_me?book_id={{book_id}}&location_id={{location['_id']}}&librarian_id={{librarian['_id']}}">Notify Me</a>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div class="col-1"></div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

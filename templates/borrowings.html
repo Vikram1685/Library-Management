@@ -1,0 +1,200 @@
+{% if session['role']=="librarian"%}
+    {% include 'librarian_head.html'%}
+{% endif %}
+{% if session['role']=="member"%}
+    {% include 'member_head.html' %}
+{% endif %}
+{% if session['role']=="admin"%}
+    {% include 'admin_head.html' %}
+{% endif %}
+<div class="m-20">
+    <div class="text-center h3 mt-10">{{message}}</div>
+    {% for borrowing in borrowings %}
+        {% set book=get_book_by_book_id(borrowing['book_id'])%}
+        {% set librarian=get_librarian_by_librarian_id(borrowing['librarian_id'])%}
+        {% set location=get_location_by_location_id(borrowing['location_id'])%}
+        {% set member=get_member_by_member_id(borrowing['member_id'])%}
+        {% set fine = get_fine_by_borrowing_id(borrowing['_id']) %}
+
+    <div class="card p-10 mt-100">
+        <div class="row">
+            <div class="col-3">
+                    <div class="mt-5">
+                        <div class="display-label">Book Details</div>
+                        {% if 'book_copy_number' in borrowing %}
+                            <div>Book Copy Number: {{borrowing['book_copy_number']}}</div>
+                        {% endif %}
+                        <div class="">{{borrowing['status']}}</div>
+                        <div class="">Requested: {{borrowing['date'].strftime("%d-%m-%Y %I:%M %p")}}</div>
+                        {% if 'borrowed_date' in borrowing %}
+                            <div>Borrowed: {{borrowing['borrowed_date'].strftime("%d-%m-%Y %I:%M %p")}}</div>
+                        {% endif %}
+                        {% if 'return_date' in borrowing %}
+                            <div>Return: {{borrowing['return_date'].strftime("%d-%m-%Y %I:%M %p")}}</div>
+                        {% endif %}
+                        {% if 'status2' in borrowing %}
+                        <div><b>{{borrowing['status2']}}</b></div>
+                        {% endif %}
+                        {% if borrowing['status'] == 'book renewed' or borrowing['status'] == 'book borrowed' %}
+
+                            {% if fine!=0 %}
+                            <div class="">Fine: ${{fine}}</div>
+                            {% endif %}
+                        {% endif %}
+                        {% if 'fine' in borrowing %}
+                        <div>fine: <a href="view_payment?borrowing_id={{borrowing['_id']}}">$ {{borrowing['fine']}}</a></div>
+                        {% endif %}
+                        <div class="mt-100">
+                        {% if session['role']=="member" %}
+                        {% if borrowing['status']=='book requested':%}
+                            <a class="card" href="cancel_request?borrowing_id={{borrowing['_id']}}">Cancel Request</a>
+                        {% endif %}
+                        {% endif %}
+                        {% if session['role']=="admin" %}
+                            {% if 'status2' in  borrowing and borrowing['status2'] == 'Location Change Requested':%}
+                                <a class="card" href="accept_location_change?borrowing_id={{borrowing['_id']}}">Accept Location Change Request</a>
+                                <a class="card" href="reject_location_change?borrowing_id={{borrowing['_id']}}">Reject Location Change Request</a>
+                            {% endif %}
+                        {% endif %}
+                        </div>
+                        <div class="mt-20">
+                        {% if session['role']=="librarian" %}
+                        {% if borrowing['status']=='book requested':%}
+                            <a class="card" href="assign_book?borrowing_id={{borrowing['_id']}}">Assign Book </a>
+                        {% endif %}
+                        {% endif %}
+                        </div>
+                    </div>
+                {% if session['role']=='member' %}
+                        {% if borrowing['status']=='book borrowed' %}
+                        {% set librarians = get_librarians() %}
+                        <div>
+                        {% if fine <=0 %}
+                            <form action="return_book">
+                            <div class="row">
+                                <div class="col-6 p-10">
+                                        <input type="hidden" name="borrowing_id" value="{{borrowing['_id']}}">
+                                        <div class="">
+                                            <label>Librarian</label>
+                                            <select name="librarian_id" required class="form-control">
+                                                <option value="">Choose Librarian</option>
+                                                {% for librarian in librarians %}
+                                                {% set location = get_location_by_location_id(librarian['location_id']) %}
+                                                    <option value="{{librarian['_id']}}" {% if str(borrowing['librarian_id']) == str(librarian['_id']) %} selected {% endif %}>{{librarian['first_name']}} {{librarian['last_name']}} -- {{location['location_name']}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                </div>
+                                <div class="col-6 mt-20 p-10">
+                                   <input type="submit" value="Return" class="btn w-100 btn-color p-10 form-control color-text">
+                                </div>
+                            </div>
+                            </form>
+                            {% else %}
+                                <form action="pay_fine">
+                                    <input type="hidden" name="fine" value="{{fine}}">
+                                    <div class="row">
+                                        <div class="col-6 p-10">
+                                                <input type="hidden" name="borrowing_id" value="{{borrowing['_id']}}">
+                                                <div class="">
+                                                    <label>Librarian</label>
+                                                    <select name="librarian_id" required class="form-control">
+                                                        <option value="">Choose Librarian</option>
+                                                        {% for librarian in librarians %}
+                                                        {% set location = get_location_by_location_id(librarian['location_id']) %}
+                                                            <option value="{{librarian['_id']}}" {% if str(borrowing['librarian_id']) == str(librarian['_id']) %} selected {% endif %}>{{librarian['first_name']}} {{librarian['last_name']}} -- {{location['location_name']}}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                        </div>
+                                        <div class="col-6 mt-20 p-10">
+                                           <input type="submit" value="Return" class="btn w-100 btn-color p-10 form-control color-text">
+                                        </div>
+                                    </div>
+                                </form>
+                            {% endif %}
+                            {% if fine <= 0 %}
+                            <div class="">
+                                <a href="renewal_book?borrowing_id={{borrowing['_id']}}">Renewal</a>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% endif %}
+                        {% endif %}
+                {% if session['role']=='librarian' %}
+                {% if borrowing['status']=='book return request' %}
+                {% set is_same_location= check_is_same_location(borrowing['_id']) %}
+                {% if is_same_location %}
+                <div class="row">
+                    <div class="col-6">
+                        <a class="card" href="collect_book?borrowing_id={{borrowing['_id']}}">collect book</a>
+                    </div>
+                </div>
+                {% endif %}
+                {% endif %}
+                {% endif %}
+            </div>
+            <div class="col-3">
+                <div class="mt-5">
+                    <div class="display-label">Book Name</div>
+                    <div class="">{{book['book_name']}}</div>
+                    <div class="display-label mt-10">Author</div>
+                    <div class="">{{book['author']}}</div>
+                    <div class="display-label mt-10">Price</div>
+                    <div class="">${{book['price']}}</div>
+                    <div class="display-label mt-10">Description</div>
+                    <div class="">{{book['description']}}</div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="mt-5">
+                    <fieldset class="p-10 me-20">
+                        <legend>Book Borrowed From:</legend>
+                        <div class="display-label">Librarian Name</div>
+                        <div class="">{{librarian['first_name']}} {{librarian['last_name']}}</div>
+                        <div class="display-label mt-5">Address</div>
+                        <div class="">{{librarian['address']}}</div>
+                        <div class="display-label mt-5">Gender</div>
+                        <div class="">{{librarian['gender']}}</div>
+                    </fieldset>
+                    <div>
+                        {% if 'return_librarian_id' in borrowing %}
+                            {% set librarian2=get_librarian_by_librarian_id(borrowing['return_librarian_id'])%}
+                        <fieldset class="p-10 me-20">
+                            <legend>Book Return To:</legend>
+                            <div class="display-label">Librarian Name</div>
+                            <div class="">{{librarian2['first_name']}} {{librarian['last_name']}}</div>
+                            <div class="display-label mt-5">Address</div>
+                            <div class="">{{librarian2['address']}}</div>
+                            <div class="display-label mt-5">Gender</div>
+                            <div class="">{{librarian2['gender']}}</div>
+                        </fieldset>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-3">
+                <div class="mt-5">
+                    <div class="display-label">Member Name</div>
+                    <div class="">{{member['first_name']}} {{member['last_name']}}</div>
+                    <div class="display-label mt-10">Address</div>
+                    <div class="">{{member['address']}}</div>
+                    <div class="display-label mt-10">Gender</div>
+                    <div class="">{{member['gender']}}</div>
+                    <fieldset class="p-10 m-20">
+                        <legend>Book Borrowed From Location:</legend>
+                        <div class="display-label">{{location['location_name']}}</div>
+                    </fieldset>
+                    {% if 'return_location_id' in borrowing %}
+                        {% set location2=get_location_by_location_id(borrowing['location_id'])%}
+                        <fieldset class="p-10 m-20">
+                            <legend>Book Borrowed To Location:</legend>
+                            <div class="display-label">{{location2['location_name']}}</div>
+                        </fieldset>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>

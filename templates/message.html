@@ -1,0 +1,12 @@
+{% if session['role']=='admin'%}
+{% include 'admin_head.html' %}
+{% elif session['role']=='librarian'%}
+{% include 'librarian_head.html' %}
+{% elif session['role']=='member'%}
+{% include 'member_head.html' %}
+{% else %}
+{% include 'head.html' %}
+{% endif%}
+<div class=" text-center  fs-1 h-7 h1-100 mt-100">
+    <div class="" style="line-height:200px">{{message}}</div>
+</div>

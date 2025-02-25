@@ -1,0 +1,226 @@
+{% include 'admin_head.html' %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Librarian Registration</title>
+    <style>
+        /* Overall container styling */
+        .row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        /* Form Section Styling */
+        .card {
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .fs-1 {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .fs-5 {
+            font-size: 1rem;
+        }
+
+        .form-control {
+            padding: 10px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .btn-color {
+            background-color: #3498db;
+            color: white;
+            font-size: 1rem;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            border: none;
+            transition: background-color 0.3s;
+        }
+
+        .btn-color:hover {
+            background-color: #2980b9;
+        }
+
+        /* Table Styling */
+        .table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        .table th, .table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        .table th {
+            background-color: #f1f1f1;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Flexbox for input fields in row */
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .col-6 {
+            flex: 0 0 48%;
+            margin-bottom: 15px;
+        }
+
+        /* Custom styles for radio buttons */
+        .radio-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .mt-100 {
+            margin-top: 100px;
+        }
+
+        .m-10 {
+            margin: 10px;
+        }
+
+        .color-text {
+            color: #fff;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .col-6 {
+                flex: 0 0 100%;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="row mt-100">
+    <!-- Librarian Registration Form -->
+    <div class="col-4 mt-20">
+        <div class="card">
+            <form action="librarian_registration_action" method="post">
+                <div class="text-center fs-1 h-7">Librarian Registration Here</div>
+                <div class="row m-10">
+                    <div class="col-6 p-5">
+                        <label class="form-label fs-5" for="first_name">First Name</label>
+                        <input type="text" name="first_name" id="first_name" placeholder="Enter Your First Name" required class="form-control">
+                    </div>
+                    <div class="col-6 p-5">
+                        <label class="form-label fs-5" for="last_name">Last Name</label>
+                        <input type="text" name="last_name" id="last_name" placeholder="Enter Your Last Name" required class="form-control">
+                    </div>
+                    <div class="col-6 p-5">
+                        <label class="form-label fs-5" for="email">Email</label>
+                        <input type="email" name="email" id="email" placeholder="Enter Email" required class="form-control">
+                    </div>
+                    <div class="col-6 p-5">
+                        <label class="form-label fs-5" for="phone">Phone</label>
+                        <input type="number" name="phone" id="phone" placeholder="Enter Your Phone Number" required class="form-control">
+                    </div>
+                    <div class="col-6 p-5">
+                        <label class="form-label fs-5" for="password">Password</label>
+                        <input type="password" name="password" id="password" placeholder="Enter Password" required class="form-control">
+                    </div>
+                    <div class="col-6 p-5">
+                        <label class="form-label fs-5" for="address">Address</label>
+                        <textarea name="address" id="address" placeholder="Enter Address" required class="form-control"></textarea>
+                    </div>
+                    <div class="col-6 p-5">
+                        <label class="form-label fs-5" for="location_id">Location</label>
+                        <select id="location_id" name="location_id" class="form-control">
+                            <option value="">Choose Location</option>
+                            {% for location in locations %}
+                                <option value="{{ location['_id'] }}">{{ location['location_name'] }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-6 p-5">
+                        <label>Gender</label>
+                        <div class="radio-group">
+                            <input type="radio" name="gender" value="male" id="male"><label for="male">Male</label>
+                            <input type="radio" name="gender" value="female" id="female"><label for="female">Female</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-5 p-5 m-10">
+                    <input type="submit" value="Register" class="btn w-100 btn-color p-10 form-control color-text fs-5">
+                </div>
+            </form>
+            <div class="text-center m-10">
+                {{ message }}
+            </div>
+        </div>
+    </div>
+
+    <!-- Librarians List -->
+    <div class="col-1"></div>
+    <div class="col-7">
+        <div class="mt-100">
+            <h3 class="text-center h-5 fs-2 h1-100">View Librarians</h3>
+            <table class="table w-100 mt-10">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Gender</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for librarian in librarians %}
+                        <tr>
+                            <td>{{ librarian['first_name'] }}</td>
+                            <td>{{ librarian['last_name'] }}</td>
+                            <td>{{ librarian['email'] }}</td>
+                            <td>{{ librarian['phone'] }}</td>
+                            <td>{{ librarian['address'] }}</td>
+                            <td>{{ librarian['gender'] }}</td>
+                            <td>{{ librarian['status'] }}</td>
+                            {% if librarian['status'] == "UnAuthorized" %}
+                                <td><a href="active_library?librarian_id={{ librarian['_id'] }}">Authorize</a></td>
+                            {% else %}
+                                <td><a href="deactive_library?librarian_id={{ librarian['_id'] }}">UnAuthorize</a></td>
+                            {% endif %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+
+
+

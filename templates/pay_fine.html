@@ -1,0 +1,48 @@
+{% if session['role']=="librarian"%}
+    {% include 'librarian_head.html'%}
+{% endif %}
+{% if session['role']=="member"%}
+    {% include 'member_head.html' %}
+{% endif %}
+<div class="row mt-100">
+<!--    <div class="card">-->
+        <div class="col-4"></div>
+        <div class="col-4">
+            <div class="card">
+                <div style="text-align:center">fine: <b>${{fine}}</b></div>
+            <form action="pay_fine_action">
+                <input type="hidden" name="fine" value="{{fine}}">
+                <input type="hidden" name="borrowing_id" value="{{borrowing_id}}">
+                <input type="hidden" name="librarian_id" value="{{librarian_id}}">
+                <label class="form-label mt-10">Card Type</label>
+                    <select name="card_type" required class="p-8 form-control w-90 ml-20" >
+                        <option value="">Choose Card Type</option>
+                        <option value="credit card">Credit Card</option>
+                        <option value="debit card">Debit Card</option>
+                    </select>
+                <div class="mt-10 col-12">
+                    <label for="card_number">Card Number</label>
+                    <input type="number" name="card_number" id="card_number" placeholder="Enter Card Number" class="form-control w-90 ml-20">
+                </div>
+                <div class="mt-10 ">
+                    <label for="name_on_card">Name On Card</label>
+                    <input type="text" name="name_on_card" id="name_on_card" placeholder="Enter name" class="form-control w-90 ml-20">
+                </div>
+                <div class="mt-10 ">
+                    <label for="cvv">CVV</label>
+                    <input type="number" name="cvv" id="cvv" placeholder="Enter CVV Number" class="form-control w-90 ml-20"  min="100" max="999">
+                </div>
+                <div class="mt-10 ">
+                    <label for="expiry_date">Expiry Date</label>
+                    <input type="month" name="expiry_date" id="expiry_date" placeholder="Enter Expiry Date " class="form-control w-90 ml-20">
+                </div>
+                <div>
+                <input type="submit" value="pay fine" class="btn w-90 btn-color p-10 mt-10 ml-10">
+                </div>
+            </form>
+            </div>
+        </div>
+        <div class="col-4"></div>
+<!--    </div>-->
+
+</div>

@@ -1,0 +1,24 @@
+{% include 'admin_head.html' %}
+<div class="row">
+   <div class=" col-2 text-color"></div>
+      <div class="col-9">
+
+             <form action="edit_category_action">
+                <input type="hidden" name="category_id" value="{{category_id}}">
+                 <div class="row">
+                      <div class="col-9">
+                           <div class="form-group mt-20">
+                               <input type="text" name="category_name" id="category_name" class="form-control w-100 p-10"  value="{{category['category_name']}}">
+                            </div>
+                       </div>
+                       <div class="col-2">
+                           <div class="form-group mt-20 ml-20">
+                              <input type="submit" value="add" class="w-90 p-7 btn background-blue text-color fs-20 ">
+                           </div>
+                      </div>
+                </div>
+           </form>
+
+     </div>
+  <div class="col-2 text-color"></div>
+</div>

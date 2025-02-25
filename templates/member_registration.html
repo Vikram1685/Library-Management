@@ -1,0 +1,55 @@
+{% include 'head.html' %}
+<div class="registration-page">
+    <div class="row ">
+        <div class="col-4"></div>
+        <div class="col-4 mt-20">
+            <div class="registration-card card p-30">
+                <form action="member_registration_action" method="post">
+                    <div class="text-center fs-1">Member Registration Here</div>
+                    <div class="row m-10">
+                        <div class="col-6 p-5">
+                            <label class="form-label fs-5" for="first_name">First Name</label>
+                            <input type="text" name="first_name" id="first_name" placeholder="Enter Your First Name" class="form-control">
+                        </div>
+                        <div class="col-6 p-5">
+                            <label class="form-label fs-5" for="last_name">Last Name</label>
+                            <input type="text" name="last_name" id="last_name" placeholder="Enter Your Last Name" class="form-control">
+                        </div>
+                        <div class="col-6 p-5">
+                            <label class="form-label fs-5" for="email">Email</label>
+                            <input type="email" name="email" id="email" placeholder="Enter Email" class="form-control">
+                        </div>
+                        <div class="col-6 p-5">
+                            <label class="form-label fs-5" for="phone">Phone</label>
+                            <input type="number" name="phone" id="phone" placeholder="Enter Your Phone Number" required class="form-control">
+                        </div>
+                        <div class="col-6 p-5">
+                            <label class="form-label fs-5" for="password">Password</label>
+                            <input type="password" name="password" id="password" placeholder="Enter Password" required class="form-control">
+                        </div>
+                        <div class="col-6 p-5">
+                            <label class="form-label fs-5" for="address">Address</label>
+                            <textarea name="address" id="address" placeholder="Enter Address" required class="form-control"></textarea>
+                        </div>
+                        <div class="col-6 p-5">
+                            <label class="form-label fs-5" for="age">Age</label>
+                            <input type="number" name="age" id="age" placeholder="Enter Age" required class="form-control">
+                        </div>
+                        <div class="col-6 p-5">
+                            <label>Gender</label>
+                            <input type="radio" name="gender" value="male" id="male"><label for="male">Male</label>
+                            <input type="radio" name="gender" value="female" id="female"><label for="female">Female</label>
+                        </div>
+                    </div>
+                    <div class="mt-5 p-5">
+                        <input type="submit" value="Register" class="btn w-100 btn-register p-10 form-control color-text fs-5">
+                    </div>
+                </form>
+                <div class="text-center m-10">
+                    {{message}}
+                </div>
+            </div>
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>

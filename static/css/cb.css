@@ -1,0 +1,881 @@
+/* Background and layout for the index page */
+/* Background and layout for the index page */
+.library-index-container {
+    background-color: #2c3e50; /* Solid dark blue background */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Styling and animation for the welcome text */
+.library-welcome-text {
+    font-size: 3rem;
+    animation: library-fadeIn 2s ease-in-out, library-bounce 2s infinite alternate;
+}
+
+/* Keyframes for fade-in */
+@keyframes library-fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Keyframes for bounce */
+@keyframes library-bounce {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-20px);
+    }
+}
+
+
+/* Navigation bar container */
+.library-nav {
+    background-color: #2c3e50; /* Dark blue background */
+    padding: 15px 20px;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Flexbox for container alignment */
+.nav-container {
+    display: flex;
+    justify-content: center; /* Centering the menu */
+}
+
+/* Navigation menu items */
+.nav-menu {
+    display: flex;
+    gap: 30px; /* Space between items */
+}
+
+.nav-menu-item {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 8px 12px;
+    transition: all 0.3s ease-in-out;
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Hover effect for menu items */
+.nav-menu-item:hover {
+    background-color: #f39c12; /* Highlight background color */
+    color: #2c3e50; /* Text color on hover */
+    transform: translateY(-3px); /* Subtle lift effect */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-menu {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+}
+
+
+/* Background for login page */
+.login-page {
+    background-color: #f4f4f9; /* Light gray background */
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Card styling */
+.login-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+}
+
+/* Title styling */
+.login-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+/* Form icon styling */
+.form-icon {
+    margin-right: 10px;
+    color: #2c3e50;
+    vertical-align: middle;
+}
+
+/* Form label */
+.form-label {
+    display: block;
+    margin-top: 10px;
+    font-size: 1.1rem;
+    color: #2c3e50;
+}
+
+/* Input field styling */
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+/* Submit button styling */
+.btn-login {
+    background-color: #2c3e50;
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: #1abc9c; /* Highlight color on hover */
+}
+
+/* Spacing utility classes */
+.mt-10 { margin-top: 10px; }
+.mt-15 { margin-top: 15px; }
+.mt-20 { margin-top: 20px; }
+.mt-40 { margin-top: 40px; }
+
+/* Common styling for all pages */
+
+/* Global form styling */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-icon {
+    margin-right: 10px;
+    color: #2c3e50;
+    vertical-align: middle;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+.form-label {
+    display: block;
+    margin-top: 10px;
+    font-size: 1.1rem;
+    color: #2c3e50;
+}
+
+/* Card styling */
+.login-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+}
+
+/* Title styling */
+.fs-3 {
+    font-size: 1.5rem;
+}
+
+.color-text {
+    color: #2c3e50;
+}
+
+/* Submit button styling */
+.btn-login {
+    background-color: #2c3e50;
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: #1abc9c; /* Highlight color on hover */
+}
+
+/* Spacing utility classes */
+.mt-10 { margin-top: 10px; }
+.mt-15 { margin-top: 15px; }
+.mt-20 { margin-top: 20px; }
+.mt-40 { margin-top: 40px; }
+
+
+
+/* Common form styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-icon {
+    margin-right: 10px;
+    color: #2c3e50;
+    vertical-align: middle;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+/* Card styles */
+.login-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+}
+
+/* Text styling */
+.fs-3 {
+    font-size: 1.5rem;
+}
+
+.color-text {
+    color: #2c3e50;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Submit button styles */
+.btn-login {
+    background-color: #2c3e50;
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: #1abc9c;
+}
+
+/* Link styling */
+.register-link {
+    color: blue;
+    text-decoration: none;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}
+
+/* Spacing utility classes */
+.mt-10 { margin-top: 10px; }
+.mt-15 { margin-top: 15px; }
+.mt-20 { margin-top: 20px; }
+.mt-40 { margin-top: 40px; }
+
+
+
+
+/* Common form styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+/* Registration card styles */
+.registration-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+/* Text styling */
+.fs-1 {
+    font-size: 2rem;
+}
+
+.color-text {
+    color: #2c3e50;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Submit button styles */
+.btn-register {
+    background-color: #2c3e50;
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-register:hover {
+    background-color: #1abc9c;
+}
+
+/* Radio buttons and label styling */
+input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* Spacing utility classes */
+.mt-10 { margin-top: 10px; }
+.mt-20 { margin-top: 20px; }
+.mt-30 { margin-top: 30px; }
+.mt-100 { margin-top: 100px; }
+
+.m-10 { margin: 10px; }
+.p-5 { padding: 5px; }
+.p-10 { padding: 10px; }
+.p-30 { padding: 30px; }
+
+
+
+
+/* Navigation bar container */
+.nav {
+    background-color: #2c3e50; /* Dark blue background */
+    padding: 15px 20px;
+    font-family: 'Arial', sans-serif;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Flexbox for container alignment */
+.nav-item {
+    display: flex;
+    justify-content: center; /* Centering the menu */
+}
+
+/* Navigation menu items */
+.nav-menu {
+    display: flex;
+    gap: 30px; /* Space between items */
+}
+
+/* Navigation menu links */
+.nav-menu-item {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 8px 12px;
+    transition: all 0.3s ease-in-out;
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Hover effect for menu items */
+.nav-menu-item:hover {
+    background-color: #f39c12; /* Highlight background color */
+    color: #2c3e50; /* Text color on hover */
+    transform: translateY(-3px); /* Subtle lift effect */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-menu {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+/* Search Form */
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group input {
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.input-group button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.input-group button:hover {
+    background-color: #0056b3;
+}
+
+/* Add Book Form */
+.card {
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 8px;
+}
+
+.card .form-label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.card input, .card select, .card textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.card input[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    font-size: 18px;
+    padding: 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.card input[type="submit"]:hover {
+    background-color: #218838;
+}
+
+/* Book Display Section */
+.card-img-top {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.card-body {
+    padding: 15px;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.btn {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    text-align: center;
+    display: block;
+    margin-top: 10px;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: white;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .col-6 {
+        padding: 0 15px;
+    }
+
+    .card {
+        padding: 15px;
+    }
+
+    .input-group input, .input-group button {
+        font-size: 14px;
+    }
+
+    .card-body {
+        padding: 10px;
+    }
+
+    .card-title {
+        font-size: 1rem;
+    }
+
+    .btn {
+        font-size: 14px;
+    }
+}
+
+/* Add margin to top */
+.mt-100 {
+    margin-top: 100px;
+}
+
+/* Add some spacing to text */
+.mb-3 {
+    margin-bottom: 15px;
+}
+
+.text-center {
+    text-align: center;
+}
+
+
+
+/* Book Display Section */
+.book-card {
+    width: 40%; /* Set card width to 40% */
+    margin-bottom: 20px; /* Add space between rows */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    background-color: white;
+    display: flex; /* Use flexbox for horizontal layout */
+    flex-direction: row; /* Image on left, content on right */
+    text-align: left;
+}
+
+/* Image Section */
+.book-card img {
+    width: 40%; /* Image takes up 40% of the card */
+    height: auto; /* Adjust image height proportionally */
+    object-fit: cover; /* Ensure the image covers the space */
+    border-radius: 8px;
+}
+
+/* Content Section */
+.card-details {
+    width: 60%; /* Remaining 60% for text content */
+    padding-left: 20px; /* Space between image and text */
+}
+
+/* Book Card Title and Text */
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-text {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* Buttons beside content */
+.card-details .btn {
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+/* Button Style */
+.btn {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    color: white;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+}
+
+/* To display 4 cards in a row */
+.book-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px; /* Adds space between cards */
+}
+
+/* Responsive Design - 2 cards per row on smaller screens */
+@media (max-width: 1200px) {
+    .book-card {
+        width: 48%; /* For tablets or smaller, 2 cards in a row */
+    }
+}
+
+@media (max-width: 768px) {
+    .book-card {
+        width: 100%; /* On mobile screens, 1 card per row */
+    }
+}
+
+
+/* Book Cards Container for the 'view_book' page */
+.book-view .row {
+    margin-top: 20px;
+}
+
+/* Book Card */
+.book-view .book-card {
+    width: 100%;
+    max-width: 250px; /* Limiting the card's max width */
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: left;
+}
+
+
+/* Book Image */
+.book-view .book-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+/* Book Info */
+.book-view .display-label {
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.book-view .display-text {
+    font-size: 0.9rem;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Buttons and Request Links */
+.book-view .card {
+    background-color: #4CAF50; /* Green color for the 'Send Request' button */
+    color: white;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.book-view .card:hover {
+    background-color: #45a049; /* Slightly darker green when hovered */
+}
+
+/* Center Search Form */
+.book-view .search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.book-view .search-form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 600px; /* Limiting form width */
+}
+
+.book-view .search-form .form-control {
+    width: 70%;
+    margin-right: 10px;
+}
+
+.book-view .search-form input[type="submit"] {
+    width: 30%;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.book-view .search-form input[type="submit"]:hover {
+    background-color: #2980b9; /* Change color on hover */
+}
+
+/* Responsive Design - 4 books per row for large screens, 3 for medium screens, 2 for smaller */
+@media (min-width: 1200px) {
+    .book-view .col-2 {
+        width: 23%; /* 4 cards in a row */
+    }
+}
+
+@media (max-width: 1200px) {
+    .book-view .col-2 {
+        width: 30%; /* 3 cards per row */
+    }
+}
+
+@media (max-width: 768px) {
+    .book-view .col-2 {
+        width: 48%; /* 2 cards per row */
+    }
+}
+
+@media (max-width: 480px) {
+    .book-view .col-2 {
+        width: 100%; /* 1 card per row on small screens */
+    }
+}
+
+
+
+.book-view {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between the cards */
+    justify-content: flex-start; /* Align cards to the start */
+}
+
+
+
+
+/* Main card container */
+.card {
+    display: flex;
+    flex-direction: column; /* Stack sections vertically */
+    gap: 20px; /* Space between each section */
+}
+
+/* Inner container for card content */
+.card-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between columns */
+}
+
+/* Each section inside the card */
+.card-section {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 22%; /* Each section takes equal space and will wrap on smaller screens */
+}
+
+/* Adjust the display for smaller screens */
+@media (max-width: 768px) {
+    .card-section {
+        flex: 1 1 100%; /* Stack sections vertically on smaller screens */
+    }
+}
+
+/* Labels for better readability */
+.display-label {
+    font-weight: bold;
+    margin-top: 10px;
+}
+

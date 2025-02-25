@@ -1,0 +1,36 @@
+{% include 'librarian_head.html' %}
+<div class="row mt-100">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <form action="add_book_copies_action">
+            <input type="hidden" name="book_id" value="{{book_id}}">
+            <div class="card p-10">
+                <div class="col-12 p-5">
+                    <div  class="text-center fs-5 ">Add Book Copies</div>
+                </div>
+                 <div class="col-12 p-5">
+                     <label class="form-label fs-5" for="location_id">Location</label>
+                     <select id="location_id" name="location_id" class="form-control">
+                         <option value="">choose locations</option>
+                         {% for location in locations:%}
+                         <option value="{{location['_id']}}">{{location['location_name']}}</option>
+                         {% endfor %}
+                     </select>
+                 </div>
+                <div class="col-12 p-5">
+                    <label  class=" form-label fs-5 " for="number_of_copies">Number Of Copies</label>
+                    <input type="number" name="number_of_copies" id="number_of_copies" placeholder="Number Of  Copies" class="form-control">
+                </div>
+                <div>
+                    <input type="submit" value="Add Copies" class="btn p-10 mt-10 btn-color ml-20 w-90">
+                </div>
+
+            </div>
+
+
+        </form>
+    </div>
+    <div class="col-4"></div>
+
+
+</div>
